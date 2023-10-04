@@ -45,7 +45,7 @@ namespace RAML_Builder
             LoadJSON.Name = "LoadJSON";
             LoadJSON.Size = new Size(139, 46);
             LoadJSON.TabIndex = 0;
-            LoadJSON.Text = "Choose JSON";
+            LoadJSON.Text = "Phase2: Choose JSON";
             LoadJSON.UseVisualStyleBackColor = true;
             LoadJSON.Click += BtnConvertJSON2RAML_Click;
             // 
@@ -73,7 +73,7 @@ namespace RAML_Builder
             LoadRPT.Name = "LoadRPT";
             LoadRPT.Size = new Size(139, 48);
             LoadRPT.TabIndex = 3;
-            LoadRPT.Text = "Choose RPT";
+            LoadRPT.Text = "Phase1: Choose RPT";
             LoadRPT.UseVisualStyleBackColor = true;
             LoadRPT.Click += BtnConvertRPT2JSON_Click;
             // 
