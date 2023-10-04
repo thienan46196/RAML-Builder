@@ -46,6 +46,14 @@ namespace RAML_Builder
             exeption.Show();
         }
 
+        private static string FirstCharToLower(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return input;
+
+            return char.ToLower(input[0]) + input.Substring(1);
+        }
+
         private void BtnConvertRPT2JSON_Click(object sender, EventArgs e)
         {
             exeption.Hide();
@@ -133,12 +141,12 @@ namespace RAML_Builder
                 }
                 if (column["IS_NULLABLE"].ToString() == "YES")
                     type += " | nil";
-
-                raml += $"  {column["COLUMN_NAME"]}:\n";
+                var columnName = FirstCharToLower(column["COLUMN_NAME"].ToString());
+                raml += $"  {columnName}:\n";
                 raml += $"    type: {type}\n";
                 if (column["CHARACTER_MAXIMUM_LENGTH"] != null)
                     raml += $"    maxLength: {column["CHARACTER_MAXIMUM_LENGTH"]}\n";
-                raml += $"    description: Description for {column["COLUMN_NAME"]}\n";
+                raml += $"    description: Description for {columnName}\n";
             }
             return raml;
         }
