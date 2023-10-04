@@ -128,3 +128,5 @@ obj/
 #.vs
 .vs/**/**.*
 
+#Props
+Properties/**/**.*
