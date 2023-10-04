@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Data;
+using System.Text;
 
 namespace RAML_Builder
 {
@@ -46,12 +47,40 @@ namespace RAML_Builder
             exeption.Show();
         }
 
-        private static string FirstCharToLower(string input)
+        private static string ToCamelCase(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return input;
 
-            return char.ToLower(input[0]) + input.Substring(1);
+            if (input.Length == 2 && input.All(char.IsUpper))
+            {
+                return input.ToLowerInvariant();
+            }
+
+            StringBuilder result = new StringBuilder();
+            bool isPreviousCharUpper = true; // Assume true at the start to lowercase the first char
+            foreach (var ch in input)
+            {
+                if (char.IsUpper(ch))
+                {
+                    if (isPreviousCharUpper)
+                    {
+                        result.Append(char.ToLowerInvariant(ch));
+                    }
+                    else
+                    {
+                        result.Append(ch);
+                    }
+                    isPreviousCharUpper = true;
+                }
+                else
+                {
+                    result.Append(ch);
+                    isPreviousCharUpper = false;
+                }
+            }
+
+            return result.ToString();
         }
 
         private void BtnConvertRPT2JSON_Click(object sender, EventArgs e)
@@ -110,7 +139,7 @@ namespace RAML_Builder
                 var record = new Dictionary<string, string>();
                 for (int j = 0; j < headers.Length; j++)
                 {
-                    record[headers[j]] = values[j] == "NULL" ? null : values[j];
+                    record[headers[j]] = values[j] == "NULL" ? null : values[j].Trim();
                 }
 
                 results.Add(record);
@@ -123,14 +152,17 @@ namespace RAML_Builder
 
         private string ConvertToRaml(JArray data)
         {
-            string raml = "#%RAML 1.0\ntitle: MuleSoft API\n\ntypes:\n";
+            string raml = "#%RAML 1.0 DataType\ndisplayName: YOUR_DISPLAY_NAME\ndescription: YOUR_DESCRIPTION\ntype: object\nproperties:\n";
             foreach (var column in data)
             {
                 string type;
-                switch (column["DATA_TYPE"].ToString())
+                switch (column["DATA_TYPE"].ToString().Trim())
                 {
                     case "int":
-                        type = "integer";
+                        type = "number";
+                        break;
+                    case "long":
+                        type = "number";
                         break;
                     case "nvarchar":
                         type = "string";
@@ -141,7 +173,7 @@ namespace RAML_Builder
                 }
                 if (column["IS_NULLABLE"].ToString() == "YES")
                     type += " | nil";
-                var columnName = FirstCharToLower(column["COLUMN_NAME"].ToString());
+                var columnName = ToCamelCase(column["COLUMN_NAME"].ToString());
                 raml += $"  {columnName}:\n";
                 raml += $"    type: {type}\n";
                 if (column["CHARACTER_MAXIMUM_LENGTH"].HasValues)
