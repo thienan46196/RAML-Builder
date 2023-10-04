@@ -144,7 +144,7 @@ namespace RAML_Builder
                 var columnName = FirstCharToLower(column["COLUMN_NAME"].ToString());
                 raml += $"  {columnName}:\n";
                 raml += $"    type: {type}\n";
-                if (column["CHARACTER_MAXIMUM_LENGTH"] != null)
+                if (column["CHARACTER_MAXIMUM_LENGTH"].HasValues)
                     raml += $"    maxLength: {column["CHARACTER_MAXIMUM_LENGTH"]}\n";
                 raml += $"    description: Description for {columnName}\n";
             }
