@@ -156,21 +156,60 @@ namespace RAML_Builder
             foreach (var column in data)
             {
                 string type;
+
                 switch (column["DATA_TYPE"].ToString().Trim())
                 {
                     case "int":
+                    case "smallint":
+                    case "mediumint":
+                    case "bigint":
+                    case "tinyint":
                         type = "number";
                         break;
-                    case "long":
+                    case "float":
+                    case "double":
+                    case "decimal":
                         type = "number";
                         break;
+                    case "char":
+                    case "varchar":
+                    case "text":
                     case "nvarchar":
                         type = "string";
+                        break;
+                    case "binary":
+                    case "varbinary":
+                    case "tinyblob":
+                    case "blob":
+                    case "mediumblob":
+                    case "longblob":
+                        type = "string"; // or "file" with additional encoding as required
+                        break;
+                    case "date":
+                        type = "date-only";
+                        break;
+                    case "time":
+                        type = "time-only";
+                        break;
+                    case "datetime":
+                    case "timestamp":
+                        type = "datetime";
+                        break;
+                    case "bit":
+                        type = "boolean"; // or "integer" depending on specific usage
+                        break;
+                    case "bool":
+                    case "boolean":
+                        type = "boolean";
+                        break;
+                    case "json":
+                        type = "any"; // or define a specific structure if known
                         break;
                     default:
                         type = column["DATA_TYPE"].ToString();
                         break;
                 }
+
                 if (column["IS_NULLABLE"].ToString() == "YES")
                     type += " | nil";
                 var columnName = ToCamelCase(column["COLUMN_NAME"].ToString());
