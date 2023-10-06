@@ -37,6 +37,11 @@ namespace RAML_Builder
             lblOutputPathJSON = new Label();
             exeption = new Label();
             sampleQueryBtn = new Button();
+            btnBuildSelectQuery = new Button();
+            lblInputPathJSONQuery = new Label();
+            lblOutPathJSONQuery = new Label();
+            txbSelectTableName = new TextBox();
+            lblSelectTblName = new Label();
             SuspendLayout();
             // 
             // LoadJSON
@@ -54,7 +59,7 @@ namespace RAML_Builder
             lblInputPathJSON.AutoSize = true;
             lblInputPathJSON.Location = new Point(24, 245);
             lblInputPathJSON.Name = "lblInputPathJSON";
-            lblInputPathJSON.Size = new Size(41, 15);
+            lblInputPathJSON.Size = new Size(68, 15);
             lblInputPathJSON.TabIndex = 1;
             lblInputPathJSON.Text = "Input path: ";
             // 
@@ -63,7 +68,7 @@ namespace RAML_Builder
             lblOutputPathRAML.AutoSize = true;
             lblOutputPathRAML.Location = new Point(24, 260);
             lblOutputPathRAML.Name = "lblOutputPathRAML";
-            lblOutputPathRAML.Size = new Size(51, 15);
+            lblOutputPathRAML.Size = new Size(78, 15);
             lblOutputPathRAML.TabIndex = 2;
             lblOutputPathRAML.Text = "Output path: ";
             // 
@@ -82,7 +87,7 @@ namespace RAML_Builder
             lblInputPathRPT.AutoSize = true;
             lblInputPathRPT.Location = new Point(25, 121);
             lblInputPathRPT.Name = "lblInputPathRPT";
-            lblInputPathRPT.Size = new Size(41, 15);
+            lblInputPathRPT.Size = new Size(68, 15);
             lblInputPathRPT.TabIndex = 4;
             lblInputPathRPT.Text = "Input path: ";
             // 
@@ -91,7 +96,7 @@ namespace RAML_Builder
             lblOutputPathJSON.AutoSize = true;
             lblOutputPathJSON.Location = new Point(24, 136);
             lblOutputPathJSON.Name = "lblOutputPathJSON";
-            lblOutputPathJSON.Size = new Size(47, 15);
+            lblOutputPathJSON.Size = new Size(78, 15);
             lblOutputPathJSON.TabIndex = 5;
             lblOutputPathJSON.Text = "Output path: ";
             // 
@@ -108,17 +113,67 @@ namespace RAML_Builder
             // 
             sampleQueryBtn.Location = new Point(658, 69);
             sampleQueryBtn.Name = "sampleQueryBtn";
-            sampleQueryBtn.Size = new Size(101, 48);
+            sampleQueryBtn.Size = new Size(130, 48);
             sampleQueryBtn.TabIndex = 7;
-            sampleQueryBtn.Text = "Sample Query";
+            sampleQueryBtn.Text = "Sample Query To Get Table's Design";
             sampleQueryBtn.UseVisualStyleBackColor = true;
-            sampleQueryBtn.Click += btnShowSampleQuery_Click;
+            sampleQueryBtn.Click += BtnShowSampleQuery_Click;
+            // 
+            // btnBuildSelectQuery
+            // 
+            btnBuildSelectQuery.Location = new Point(350, 69);
+            btnBuildSelectQuery.Name = "btnBuildSelectQuery";
+            btnBuildSelectQuery.Size = new Size(159, 48);
+            btnBuildSelectQuery.TabIndex = 8;
+            btnBuildSelectQuery.Text = "Phase3: Build Select Query";
+            btnBuildSelectQuery.UseVisualStyleBackColor = true;
+            btnBuildSelectQuery.Click += BtnBuildSelectQuery_Click;
+            // 
+            // lblInputPathJSONQuery
+            // 
+            lblInputPathJSONQuery.AutoSize = true;
+            lblInputPathJSONQuery.Location = new Point(361, 161);
+            lblInputPathJSONQuery.Name = "lblInputPathJSONQuery";
+            lblInputPathJSONQuery.Size = new Size(65, 15);
+            lblInputPathJSONQuery.TabIndex = 9;
+            lblInputPathJSONQuery.Text = "Input path:";
+            // 
+            // lblOutPathJSONQuery
+            // 
+            lblOutPathJSONQuery.AutoSize = true;
+            lblOutPathJSONQuery.Location = new Point(361, 179);
+            lblOutPathJSONQuery.Name = "lblOutPathJSONQuery";
+            lblOutPathJSONQuery.Size = new Size(75, 15);
+            lblOutPathJSONQuery.TabIndex = 10;
+            lblOutPathJSONQuery.Text = "Output path:";
+            // 
+            // txbSelectTableName
+            // 
+            txbSelectTableName.Location = new Point(442, 128);
+            txbSelectTableName.Name = "txbSelectTableName";
+            txbSelectTableName.Size = new Size(206, 23);
+            txbSelectTableName.TabIndex = 11;
+            // 
+            // lblSelectTblName
+            // 
+            lblSelectTblName.AutoSize = true;
+            lblSelectTblName.Location = new Point(361, 136);
+            lblSelectTblName.Name = "lblSelectTblName";
+            lblSelectTblName.Size = new Size(75, 15);
+            lblSelectTblName.TabIndex = 12;
+            lblSelectTblName.Text = "Table Name: ";
+            lblSelectTblName.Click += lblSelectTblName_Click;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblSelectTblName);
+            Controls.Add(txbSelectTableName);
+            Controls.Add(lblOutPathJSONQuery);
+            Controls.Add(lblInputPathJSONQuery);
+            Controls.Add(btnBuildSelectQuery);
             Controls.Add(sampleQueryBtn);
             Controls.Add(exeption);
             Controls.Add(lblOutputPathJSON);
@@ -144,5 +199,10 @@ namespace RAML_Builder
         private Label lblOutputPathJSON;
         private Label exeption;
         private Button sampleQueryBtn;
+        private Button btnBuildSelectQuery;
+        private Label lblInputPathJSONQuery;
+        private Label lblOutPathJSONQuery;
+        private TextBox txbSelectTableName;
+        private Label lblSelectTblName;
     }
 }

@@ -28,25 +28,25 @@
         /// </summary>
         private void InitializeComponent()
         {
-            textBox1 = new TextBox();
+            txbSelectTableName = new TextBox();
             SuspendLayout();
             // 
-            // textBox1
+            // txbSelectTableName
             // 
-            textBox1.Location = new Point(84, 125);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.ReadOnly = true;
-            textBox1.ScrollBars = ScrollBars.Vertical;
-            textBox1.Size = new Size(520, 167);
-            textBox1.TabIndex = 0;
+            txbSelectTableName.Location = new Point(84, 125);
+            txbSelectTableName.Multiline = true;
+            txbSelectTableName.Name = "txbSelectTableName";
+            txbSelectTableName.ReadOnly = true;
+            txbSelectTableName.ScrollBars = ScrollBars.Vertical;
+            txbSelectTableName.Size = new Size(520, 167);
+            txbSelectTableName.TabIndex = 0;
             // 
             // PopupForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(textBox1);
+            Controls.Add(txbSelectTableName);
             Name = "PopupForm";
             Text = "PopupForm";
             ResumeLayout(false);
@@ -55,6 +55,6 @@
 
         #endregion
 
-        private TextBox textBox1;
+        private TextBox txbSelectTableName;
     }
 }

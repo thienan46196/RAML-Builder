@@ -9,7 +9,7 @@
 
         public void ShowMessage(string message)
         {
-            textBox1.Text = message;
+            txbSelectTableName.Text = message;
             ShowDialog();
         }
 

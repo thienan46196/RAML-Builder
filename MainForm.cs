@@ -12,6 +12,12 @@ namespace RAML_Builder
             InitializeComponent();
         }
 
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        #region Form's View
         private void BtnConvertJSON2RAML_Click(object sender, EventArgs e)
         {
             exeption.Hide();
@@ -41,6 +47,73 @@ namespace RAML_Builder
             }
         }
 
+        private void BtnConvertRPT2JSON_Click(object sender, EventArgs e)
+        {
+            exeption.Hide();
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "RPT files (*.rpt)|*.rpt";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var filePath = openFileDialog.FileName;
+                    lblInputPathRPT.Text = "Input path: " + filePath;
+
+                    var data = File.ReadAllText(filePath);
+                    Console.Write(data);
+                    var jsonOuput = ConvertToJSON(data);
+
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.Filter = "JSON files (*.json)|*.json";
+                        saveFileDialog.DefaultExt = "json";
+                        saveFileDialog.AddExtension = true;
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            File.WriteAllText(saveFileDialog.FileName, jsonOuput);
+                            lblOutputPathJSON.Text = "Output path: " + saveFileDialog.FileName;
+                        }
+                    }
+                }
+            }
+        }
+
+        private void BtnShowSampleQuery_Click(object sender, EventArgs e)
+        {
+            PopupForm sampleQuery = new PopupForm();
+            sampleQuery.ShowMessage("SELECT \r\n    COLUMN_NAME, \r\n    DATA_TYPE,\r\n    CHARACTER_MAXIMUM_LENGTH,\r\n    IS_NULLABLE\r\nFROM INFORMATION_SCHEMA.COLUMNS \r\nWHERE TABLE_NAME = 'Replace_With_Your_Actual_Table_Name'; \r\n\r\n\r\n Remember to change the behavior of F5 to export to .rpt file");
+        }
+
+        private void BtnBuildSelectQuery_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "JSON files (*.json)|*.json";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    var filePath = openFileDialog.FileName;
+                    lblInputPathJSONQuery.Text = "Input path: " + filePath;
+
+                    var data = JArray.Parse(File.ReadAllText(filePath));
+                    var sqlOutput = BuildSelectQuery(data, txbSelectTableName.Text);
+
+                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                    {
+                        saveFileDialog.Filter = "RAML files (*.sql)|*.sql";
+                        saveFileDialog.DefaultExt = "sql";
+                        saveFileDialog.AddExtension = true;
+                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                        {
+                            File.WriteAllText(saveFileDialog.FileName, sqlOutput);
+                            lblOutputPathRAML.Text = "Output path: " + saveFileDialog.FileName;
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
+        #region Utils
         private void ShowEx(string message)
         {
             exeption.Text = message;
@@ -82,37 +155,10 @@ namespace RAML_Builder
 
             return result.ToString();
         }
+        #endregion
 
-        private void BtnConvertRPT2JSON_Click(object sender, EventArgs e)
-        {
-            exeption.Hide();
-            using (OpenFileDialog openFileDialog = new OpenFileDialog())
-            {
-                openFileDialog.Filter = "RPT files (*.rpt)|*.rpt";
-                if (openFileDialog.ShowDialog() == DialogResult.OK)
-                {
-                    var filePath = openFileDialog.FileName;
-                    lblInputPathRPT.Text = "Input path: " + filePath;
 
-                    var data = File.ReadAllText(filePath);
-                    Console.Write(data);
-                    var jsonOuput = ConvertToJSON(data);
-
-                    using (SaveFileDialog saveFileDialog = new SaveFileDialog())
-                    {
-                        saveFileDialog.Filter = "JSON files (*.json)|*.json";
-                        saveFileDialog.DefaultExt = "json";
-                        saveFileDialog.AddExtension = true;
-                        if (saveFileDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            File.WriteAllText(saveFileDialog.FileName, jsonOuput);
-                            lblOutputPathJSON.Text = "Output path: " + saveFileDialog.FileName;
-                        }
-                    }
-                }
-            }
-        }
-
+        #region Main functionalities
         public string ConvertToJSON(string content)
         {
             var _ex = "";
@@ -212,28 +258,36 @@ namespace RAML_Builder
 
                 if (column["IS_NULLABLE"].ToString() == "YES")
                     type += " | nil";
-                var columnName = ToCamelCase(column["COLUMN_NAME"].ToString());
+                var columnName = ToCamelCase(column["COLUMN_NAME"].ToString().Trim());
                 raml += $"  {columnName}:\n";
                 raml += $"    type: {type}\n";
-                if (column["CHARACTER_MAXIMUM_LENGTH"].HasValues)
+                if (!string.IsNullOrEmpty(column["CHARACTER_MAXIMUM_LENGTH"].ToString()))
                     raml += $"    maxLength: {column["CHARACTER_MAXIMUM_LENGTH"]}\n";
                 raml += $"    description: Description for {columnName}\n";
             }
             return raml;
         }
+        #endregion
 
-        private void btnShowSampleQuery_Click(object sender, EventArgs e)
+        private string BuildSelectQuery(JArray data, string tableName = "[YOUR_TABLE_NAME]")
         {
-            PopupForm sampleQuery = new PopupForm();
-            sampleQuery.ShowMessage("SELECT \r\n    COLUMN_NAME, \r\n    DATA_TYPE,\r\n    CHARACTER_MAXIMUM_LENGTH,\r\n    IS_NULLABLE\r\nFROM INFORMATION_SCHEMA.COLUMNS \r\nWHERE TABLE_NAME = 'Replace_With_Your_Actual_Table_Name'; \r\n\r\n\r\n Remember to change the behavior of F5 to export to .rpt file");
+            if (data == null) return "";
+            var fields = new List<string>();
+            foreach (var column in data)
+            {
+                var col = column["COLUMN_NAME"].ToString();
+                if (!string.IsNullOrEmpty(col))
+                {
+                    fields.Add(ToCamelCase(col.Trim()));
+                }
+            }
+
+            return @$"SELECT {string.Join(", ", fields)} FROM {tableName}";
         }
 
-
-        private void MainForm_Load(object sender, EventArgs e)
+        private void lblSelectTblName_Click(object sender, EventArgs e)
         {
 
         }
     }
-
-
 }
