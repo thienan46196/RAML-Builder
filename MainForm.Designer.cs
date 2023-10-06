@@ -162,7 +162,6 @@ namespace RAML_Builder
             lblSelectTblName.Size = new Size(75, 15);
             lblSelectTblName.TabIndex = 12;
             lblSelectTblName.Text = "Table Name: ";
-            lblSelectTblName.Click += lblSelectTblName_Click;
             // 
             // MainForm
             // 

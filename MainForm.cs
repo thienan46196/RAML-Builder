@@ -104,7 +104,7 @@ namespace RAML_Builder
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             File.WriteAllText(saveFileDialog.FileName, sqlOutput);
-                            lblOutputPathRAML.Text = "Output path: " + saveFileDialog.FileName;
+                            lblOutPathJSONQuery.Text = "Output path: " + saveFileDialog.FileName;
                         }
                     }
                 }
@@ -284,11 +284,6 @@ namespace RAML_Builder
             }
 
             return @$"SELECT {string.Join(", ", fields)} FROM {tableName}";
-        }
-
-        private void lblSelectTblName_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
