@@ -261,7 +261,8 @@ namespace RAML_Builder
                 var columnName = ToCamelCase(column["COLUMN_NAME"].ToString().Trim());
                 raml += $"  {columnName}:\n";
                 raml += $"    type: {type}\n";
-                if (!string.IsNullOrEmpty(column["CHARACTER_MAXIMUM_LENGTH"].ToString()) && !type.Contains("| nil"))
+                var length = column["CHARACTER_MAXIMUM_LENGTH"].ToString().Trim();
+                if (!string.IsNullOrEmpty(length) && length != "NULL" && type == "string")
                     raml += $"    maxLength: {column["CHARACTER_MAXIMUM_LENGTH"]}\n";
                 raml += $"    description: Description for {columnName}\n";
             }
