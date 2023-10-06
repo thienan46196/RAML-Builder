@@ -52,20 +52,20 @@ namespace RAML_Builder
             // lblInputPathJSON
             // 
             lblInputPathJSON.AutoSize = true;
-            lblInputPathJSON.Location = new Point(16, 245);
+            lblInputPathJSON.Location = new Point(24, 245);
             lblInputPathJSON.Name = "lblInputPathJSON";
             lblInputPathJSON.Size = new Size(41, 15);
             lblInputPathJSON.TabIndex = 1;
-            lblInputPathJSON.Text = "Input: ";
+            lblInputPathJSON.Text = "Input path: ";
             // 
             // lblOutputPathRAML
             // 
             lblOutputPathRAML.AutoSize = true;
-            lblOutputPathRAML.Location = new Point(16, 260);
+            lblOutputPathRAML.Location = new Point(24, 260);
             lblOutputPathRAML.Name = "lblOutputPathRAML";
             lblOutputPathRAML.Size = new Size(51, 15);
             lblOutputPathRAML.TabIndex = 2;
-            lblOutputPathRAML.Text = "Output: ";
+            lblOutputPathRAML.Text = "Output path: ";
             // 
             // LoadRPT
             // 
@@ -84,7 +84,7 @@ namespace RAML_Builder
             lblInputPathRPT.Name = "lblInputPathRPT";
             lblInputPathRPT.Size = new Size(41, 15);
             lblInputPathRPT.TabIndex = 4;
-            lblInputPathRPT.Text = "Input: ";
+            lblInputPathRPT.Text = "Input path: ";
             // 
             // lblOutputPathJSON
             // 
@@ -93,7 +93,7 @@ namespace RAML_Builder
             lblOutputPathJSON.Name = "lblOutputPathJSON";
             lblOutputPathJSON.Size = new Size(47, 15);
             lblOutputPathJSON.TabIndex = 5;
-            lblOutputPathJSON.Text = "Ouput: ";
+            lblOutputPathJSON.Text = "Output path: ";
             // 
             // exeption
             // 

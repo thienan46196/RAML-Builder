@@ -21,7 +21,7 @@ namespace RAML_Builder
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     var filePath = openFileDialog.FileName;
-                    lblInputPathJSON.Text = "Input: " + filePath;
+                    lblInputPathJSON.Text = "Input path: " + filePath;
 
                     var data = JArray.Parse(File.ReadAllText(filePath));
                     var ramlOutput = ConvertToRaml(data);
@@ -34,7 +34,7 @@ namespace RAML_Builder
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             File.WriteAllText(saveFileDialog.FileName, ramlOutput);
-                            lblOutputPathRAML.Text = "Output: " + saveFileDialog.FileName;
+                            lblOutputPathRAML.Text = "Output path: " + saveFileDialog.FileName;
                         }
                     }
                 }
@@ -92,7 +92,7 @@ namespace RAML_Builder
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     var filePath = openFileDialog.FileName;
-                    lblInputPathRPT.Text = "Input: " + filePath;
+                    lblInputPathRPT.Text = "Input path: " + filePath;
 
                     var data = File.ReadAllText(filePath);
                     Console.Write(data);
@@ -106,7 +106,7 @@ namespace RAML_Builder
                         if (saveFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             File.WriteAllText(saveFileDialog.FileName, jsonOuput);
-                            lblOutputPathJSON.Text = "Output: " + saveFileDialog.FileName;
+                            lblOutputPathJSON.Text = "Output path: " + saveFileDialog.FileName;
                         }
                     }
                 }
@@ -227,6 +227,7 @@ namespace RAML_Builder
             PopupForm sampleQuery = new PopupForm();
             sampleQuery.ShowMessage("SELECT \r\n    COLUMN_NAME, \r\n    DATA_TYPE,\r\n    CHARACTER_MAXIMUM_LENGTH,\r\n    IS_NULLABLE\r\nFROM INFORMATION_SCHEMA.COLUMNS \r\nWHERE TABLE_NAME = 'Replace_With_Your_Actual_Table_Name'; \r\n\r\n\r\n Remember to change the behavior of F5 to export to .rpt file");
         }
+
 
         private void MainForm_Load(object sender, EventArgs e)
         {
