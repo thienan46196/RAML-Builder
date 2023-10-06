@@ -210,6 +210,7 @@ namespace RAML_Builder
                     case "mediumint":
                     case "bigint":
                     case "tinyint":
+                    case "money":
                         type = "number";
                         break;
                     case "float":

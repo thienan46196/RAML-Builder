@@ -103,7 +103,7 @@ namespace RAML_Builder
             // exeption
             // 
             exeption.AutoSize = true;
-            exeption.Location = new Point(211, 365);
+            exeption.Location = new Point(133, 468);
             exeption.Name = "exeption";
             exeption.Size = new Size(65, 15);
             exeption.TabIndex = 6;
@@ -111,7 +111,7 @@ namespace RAML_Builder
             // 
             // sampleQueryBtn
             // 
-            sampleQueryBtn.Location = new Point(658, 69);
+            sampleQueryBtn.Location = new Point(730, 69);
             sampleQueryBtn.Name = "sampleQueryBtn";
             sampleQueryBtn.Size = new Size(130, 48);
             sampleQueryBtn.TabIndex = 7;
@@ -167,7 +167,7 @@ namespace RAML_Builder
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(943, 533);
             Controls.Add(lblSelectTblName);
             Controls.Add(txbSelectTableName);
             Controls.Add(lblOutPathJSONQuery);
