@@ -1,6 +1,6 @@
 ﻿namespace RAML_Builder
 {
-    partial class SampleQuery
+    partial class PopupForm
     {
         /// <summary>
         /// Required designer variable.
@@ -41,14 +41,14 @@
             textBox1.Size = new Size(520, 167);
             textBox1.TabIndex = 0;
             // 
-            // SampleQuery
+            // PopupForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(textBox1);
-            Name = "SampleQuery";
-            Text = "SampleQuery";
+            Name = "PopupForm";
+            Text = "PopupForm";
             ResumeLayout(false);
             PerformLayout();
         }

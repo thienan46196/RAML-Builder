@@ -222,9 +222,9 @@ namespace RAML_Builder
             return raml;
         }
 
-        private void btnShowMessage_Click(object sender, EventArgs e)
+        private void btnShowSampleQuery_Click(object sender, EventArgs e)
         {
-            SampleQuery sampleQuery = new SampleQuery();
+            PopupForm sampleQuery = new PopupForm();
             sampleQuery.ShowMessage("SELECT \r\n    COLUMN_NAME, \r\n    DATA_TYPE,\r\n    CHARACTER_MAXIMUM_LENGTH,\r\n    IS_NULLABLE\r\nFROM INFORMATION_SCHEMA.COLUMNS \r\nWHERE TABLE_NAME = 'Replace_With_Your_Actual_Table_Name'; \r\n\r\n\r\n Remember to change the behavior of F5 to export to .rpt file");
         }
 

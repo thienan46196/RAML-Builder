@@ -112,7 +112,7 @@ namespace RAML_Builder
             sampleQueryBtn.TabIndex = 7;
             sampleQueryBtn.Text = "Sample Query";
             sampleQueryBtn.UseVisualStyleBackColor = true;
-            sampleQueryBtn.Click += btnShowMessage_Click;
+            sampleQueryBtn.Click += btnShowSampleQuery_Click;
             // 
             // MainForm
             // 

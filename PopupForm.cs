@@ -1,8 +1,8 @@
 ﻿namespace RAML_Builder
 {
-    public partial class SampleQuery : Form
+    public partial class PopupForm : Form
     {
-        public SampleQuery()
+        public PopupForm()
         {
             InitializeComponent();
         }
